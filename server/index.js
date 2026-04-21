@@ -16,8 +16,10 @@ app.get('/', (req, res) => {
     res.send('heloo word')
 })
 
-connectDb().then(() => {
-    app.listen(PORT, () => {
-        console.log('rodando servidor')
-    })
-})
+connectDb()
+  .then(() => console.log("Banco conectado"))
+  .catch(err => console.error("Erro no banco:", err));
+
+app.listen(PORT, () => {
+  console.log("rodando servidor");
+});
