@@ -2,7 +2,7 @@ import { GlobalStyle } from "./assets/global"
 import { styled } from 'styled-components'
 import { useNavigate } from "react-router-dom"
 import UseToggle from "./hooks/useToggle"
-import useLogForm from "./hooks/useAuthForm"
+import useAuthForm from "./hooks/useAuthForm"
 
 const Main = styled.main`
   min-height: 100vh;
