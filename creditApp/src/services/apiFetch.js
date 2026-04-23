@@ -12,7 +12,10 @@ export default async function apiFetch(endPoint, {method = 'GET', headers = {}, 
         })
 
         if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`)
+            const error = new Error('Erro na requisição')
+            error.status = response.status
+            error.body = await response.json().catch(() => null) // opcional
+            throw error
         }
 
         return response.json()

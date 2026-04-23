@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import useClientForm from "../hooks/useClientForm"
+import Loading from "./Loading"
 
 const Button = styled.button`
     padding: 10px;
@@ -152,13 +153,14 @@ const Buttons = styled.div`
     }
 `
 export default function Modal({toggle, onClick}){
-    const {register, handleSubmit, onSubmit, handleCancel, errors} = useClientForm(onClick) 
+    const {register, handleSubmit, onSubmit, handleCancel, errors, isPending} = useClientForm(onClick) 
     return(
         <>
             <Button onClick={onClick}>Cadastrar cliente</Button>
             {toggle && (
                 <Overlay>
                     <Form onSubmit={handleSubmit(onSubmit)}>
+                        {isPending && <Loading/>}
                         <h1>Salvar cliente</h1>
                         <Field>
                             <label htmlFor="">Nome</label>

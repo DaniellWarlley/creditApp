@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import connectDb from './dataBase/connectDb.js'
 
 const app = express()
+const PORT = process.env.PORT || 3333
 
 dotenv.config()
 app.use(express.json())
@@ -15,8 +16,10 @@ app.get('/', (req, res) => {
     res.send('heloo word')
 })
 
-connectDb().then(() => {
-    app.listen(3333, () => {
-        console.log('rodando servidor')
-    })
-})
+connectDb()
+    .then(() => console.log("Banco conectado"))
+    .catch(err => console.error("Erro no banco:", err));
+
+app.listen(PORT, () => {
+    console.log("rodando servidor");
+});

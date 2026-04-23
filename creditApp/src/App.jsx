@@ -2,7 +2,8 @@ import { GlobalStyle } from "./assets/global"
 import { styled } from 'styled-components'
 import { useNavigate } from "react-router-dom"
 import UseToggle from "./hooks/useToggle"
-import useLogForm from "./hooks/useAuthForm"
+import useAuthForm from "./hooks/useAuthForm"
+import Loading from "./components/Loading"
 
 const Main = styled.main`
   min-height: 100vh;
@@ -69,6 +70,8 @@ const FormHead = styled.header`
 `
 
 const FormBody = styled.div`
+  position: relative;
+
   width: 50%;
   padding: 15px;
 
@@ -136,12 +139,13 @@ const InputWrapper = styled.div`
 
 function App() {
   const { toggle, handleToggle} = UseToggle()
-  const { register, handleSubmit, onSubmit, errors } = useAuthForm(toggle)
+  const { register, handleSubmit, onSubmit, errors, isSubmitting } = useAuthForm(toggle)
   
   return (
     <Main>
       <GlobalStyle/>
       <Form onSubmit={handleSubmit(onSubmit)}>
+        {isSubmitting && <Loading/>}
         <FormHead>
           <h1>
             {toggle ? 'Cadastro' : 'Login'}
@@ -149,7 +153,7 @@ function App() {
           {toggle ? <p>Crie uma conta para ter acesso ao site</p> : <p>Faça login para ter acesso ao site</p>}
           
         </FormHead>
-        <FormBody>
+        <FormBody>         
           {toggle && 
             <InputWrapper>
               <label>Nome</label>

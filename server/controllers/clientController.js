@@ -9,7 +9,7 @@ export const createClient = async (req, res) => {
 
     if(!await Users.findById(userId)) return res.status(400).json({msg: 'User does not exist'})
 
-    if(await Clients.findOne({userId, name: data.name, contato: data.contato})) return res.json({msg: 'Client alredy exist'})
+    if(await Clients.findOne({userId, name: data.name, contato: data.contato})) return res.status(400).json({msg: 'Client alredy exist'})
 
     const saldo = data.credito - data.debito
 

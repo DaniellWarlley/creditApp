@@ -32,6 +32,7 @@ export default function useClientForm(onClick = null){
         handleSubmit,
         onSubmit,
         errors: formState.errors,
+        isPending: formState.isSubmitting,
         handleCancel
     }
 }

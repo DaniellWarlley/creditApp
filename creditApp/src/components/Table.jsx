@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import useQueryClient from '../hooks/useQueryClient'
+import Loading from "./Loading"
 
 const TableStyled = styled.table`
     width: 100%;
@@ -57,10 +58,11 @@ const TableContainer = styled.div`
     }
 `
 export default function Table(){
-    const { data } = useQueryClient() 
+    const { data, isPending } = useQueryClient() 
 
     return(
         <TableContainer>
+            {isPending && <Loading/>}
             <TableStyled>
                 <thead>
                     <tr>

@@ -4,14 +4,13 @@ import bcrypt from 'bcryptjs'
 export const cad = async (req, res) => {
     const {name, email, passWord} = req.body || {}
 
-    console.log(req.body)
     if(!name || !email || !passWord) return res.status(400).json({msg: 'Dados invalidos'})
     
     try{
         const existingUser = await Users.findOne({email})
 
         if(existingUser){
-            return res.json({msg: 'User alredy exist'})
+            return res.status(409).json({msg: 'User alredy exist'})
         }
 
         const salt = await bcrypt.genSalt(10)
@@ -29,6 +28,8 @@ export const cad = async (req, res) => {
 
 export const log = async (req, res) => {
     const { email, passWord } = req.body
+
+    if( !email || !passWord) return res.status(400).json({msg: 'Dados invalidos'})
 
     try{
         const existingUser = await Users.findOne({ email })
