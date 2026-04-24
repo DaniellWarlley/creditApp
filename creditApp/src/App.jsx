@@ -3,7 +3,10 @@ import { styled } from 'styled-components'
 import { useNavigate } from "react-router-dom"
 import UseToggle from "./hooks/useToggle"
 import useAuthForm from "./hooks/useAuthForm"
+<<<<<<< HEAD
 import Loading from "./components/Loading"
+=======
+>>>>>>> 0e3a7e7e5b0ee4a9cc37330471b2d8eeb989605b
 
 const Main = styled.main`
   min-height: 100vh;
