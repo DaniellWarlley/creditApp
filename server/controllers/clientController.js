@@ -29,13 +29,43 @@ export const getAllUserClients = async (req, res) => {
 
     if(!userId) return res.status(400).json({msg: 'Dados invalidos'})
 
-    console.log(userId)
-
     try{
         const clients = await Clients.find({userId})
 
         return res.status(200).json(clients)
     }catch(err){
         return res.status(500).json(err)
+    }
+}
+
+export const getClientById = async (req, res) => {
+    const { clientId } = req.params
+
+    if(!clientId) return res.status(400).json({msg: 'Dados invalidos'})
+
+    try{
+        const client = await Clients.findById(clientId)
+
+        if(!client) return res.status(404).json({msg: 'Cliente não encontrado'})
+
+        return res.status(200).json(client)
+    }catch(err){
+        return res.status(500).json(err)
+    }
+}
+
+export const deleteClientById = async (req, res) => {
+    const { clientId } = req.params
+
+    if(!clientId) return res.status(400).json({msg: 'Dados invalidos'})
+    console.log(clientId)
+    try {
+        const client = await Clients.findByIdAndDelete(clientId)
+
+        if(!client) return res.status(404).json({msg: 'Cliente não encontrado'})
+
+        return res.status(200).json({msg: 'Cliente encontrado com sucesso'})
+    } catch (error) {
+        return res.status(500).json(res)
     }
 }

@@ -42,7 +42,7 @@ const Form = styled.form`
 
     display: flex;
     flex-direction: column;
-    position: relative;
+
 
     background-color: #1A1A1A;
     border-radius: 8px; 
@@ -154,7 +154,6 @@ const Buttons = styled.div`
 `
 export default function Modal({toggle, onClick}){
     const {register, handleSubmit, onSubmit, handleCancel, errors, isPending} = useClientForm(onClick) 
-
     return(
         <>
             <Button onClick={onClick}>Cadastrar cliente</Button>

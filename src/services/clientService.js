@@ -17,12 +17,5 @@ export const clientService = {
         })
 
         return res
-    },
-    deleteClientById: async (clientId) => {
-        const res = await apiFetch(`clients/client/${clientId}`, {
-            method: 'DELETE'
-        })
-
-        return res
     }
 }

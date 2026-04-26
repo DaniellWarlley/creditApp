@@ -1,9 +1,6 @@
 import styled from "styled-components"
 import useQueryClient from '../hooks/useQueryClient'
 import Loading from "./Loading"
-import { FaPen, FaTrash  } from "react-icons/fa"
-import useClientForm from "../hooks/useClientForm"
-import { clientService } from "../services/clientService"
 
 const TableStyled = styled.table`
     width: 100%;
@@ -28,7 +25,6 @@ const TableStyled = styled.table`
 
     td{
         padding: 14px;
-        gap: 10px;
 
         text-align: center;
 
@@ -61,25 +57,9 @@ const TableContainer = styled.div`
         display: none;
     }
 `
-
-const PencilIcon = styled(FaPen)`
-    transition: all ease 0.3s;
-
-    &:hover{
-        color: #f72c25;
-    }
-`
-
-const TrashIcon = styled(FaTrash)`
-    transition: all ease 0.3s;
-
-    &:hover{
-        color: #f72c25;
-    }
-`
 export default function Table(){
     const { data, isPending } = useQueryClient() 
-    const {} = useClientForm()
+
     return(
         <TableContainer>
             {isPending && <Loading/>}
@@ -105,7 +85,7 @@ export default function Table(){
                         <td>{client.credito}</td>
                         <td>{client.debito}</td>
                         <td>{client.date || '...'}</td>
-                        <td><PencilIcon /> <TrashIcon onClick={() => clientService.deleteClientById(client._id)}/></td> 
+                        <td>...</td>
                     </Row>)}                  
                 </tbody>               
             </TableStyled>

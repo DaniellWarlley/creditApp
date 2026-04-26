@@ -5,7 +5,7 @@ import useMutationClient from './useMutationClient'
 
 
 export default function useClientForm(onClick = null){
-    const { mutateAsync, isPending } = useMutationClient()
+    const { mutate } = useMutationClient()
 
     const {register, handleSubmit, formState, reset} = useForm({
         resolver: zodResolver(clientSchema),
@@ -17,17 +17,13 @@ export default function useClientForm(onClick = null){
         }
     })
 
-    const onSubmit = async (data) => {
-        await mutateAsync(data)
+    const onSubmit = (data) => {
+        mutate(data)
         handleCancel()
     }
 
-    const handleEdit = (id) => {
-        onClick()
-        console.log(id)
-    }
     const handleCancel = () => {
-        onClick?.()
+        onClick()
         reset()
     }
 
@@ -36,8 +32,7 @@ export default function useClientForm(onClick = null){
         handleSubmit,
         onSubmit,
         errors: formState.errors,
-        isPending,
-        handleCancel,
-        handleEdit
+        isPending: formState.isSubmitting,
+        handleCancel
     }
 }
