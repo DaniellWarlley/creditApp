@@ -2,8 +2,8 @@ import { Users } from "../models/authSchema.js"
 import { Clients } from "../models/clientSchema.js"
 
 export const createClient = async (req, res) => {
-    console.log(req.body)
-    const { userId, data } = req.body || {}
+    const { data } = req.body || {}
+    const { userId} = req.userId
 
     if(!userId || !data  ) return res.status(400).json({msg: 'Dados invalidos'})
 
@@ -25,7 +25,7 @@ export const createClient = async (req, res) => {
 }
 
 export const getAllUserClients = async (req, res) => {
-    const {userId} = req.params
+    const { userId} = req.userId
 
     if(!userId) return res.status(400).json({msg: 'Dados invalidos'})
 
@@ -58,7 +58,7 @@ export const deleteClientById = async (req, res) => {
     const { clientId } = req.params
 
     if(!clientId) return res.status(400).json({msg: 'Dados invalidos'})
-    console.log(clientId)
+
     try {
         const client = await Clients.findByIdAndDelete(clientId)
 

@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { clientSchema } from '../schemas/clientSchema'
-import useMutationClient from './useMutationClient'
+import useMutationClient from './clientsHooks/useMutationClient'
 
 
 export default function useClientForm(onClick = null){

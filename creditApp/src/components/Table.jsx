@@ -1,9 +1,10 @@
 import styled from "styled-components"
-import useQueryClient from '../hooks/useQueryClient'
+import useQueryClient from '../hooks/clientsHooks/useQueryClient'
 import Loading from "./Loading"
 import { FaPen, FaTrash  } from "react-icons/fa"
 import useClientForm from "../hooks/useClientForm"
 import { clientService } from "../services/clientService"
+import useDeleteClient from "../hooks/clientsHooks/useDeleteClient"
 
 const TableStyled = styled.table`
     width: 100%;
@@ -79,7 +80,7 @@ const TrashIcon = styled(FaTrash)`
 `
 export default function Table(){
     const { data, isPending } = useQueryClient() 
-    const {} = useClientForm()
+    const { mutate } = useDeleteClient()
     return(
         <TableContainer>
             {isPending && <Loading/>}
@@ -105,7 +106,7 @@ export default function Table(){
                         <td>{client.credito}</td>
                         <td>{client.debito}</td>
                         <td>{client.date || '...'}</td>
-                        <td><PencilIcon /> <TrashIcon onClick={() => clientService.deleteClientById(client._id)}/></td> 
+                        <td><PencilIcon /> <TrashIcon onClick={() => mutate(client._id)}/></td> 
                     </Row>)}                  
                 </tbody>               
             </TableStyled>

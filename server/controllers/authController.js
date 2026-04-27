@@ -1,5 +1,6 @@
 import { Users } from "../models/authSchema.js"
 import bcrypt from 'bcryptjs'
+import createToken from "../utils/createToken.js"
 
 export const cad = async (req, res) => {
     const {name, email, passWord} = req.body || {}
@@ -19,8 +20,13 @@ export const cad = async (req, res) => {
         const user = new Users({name, email, passWord: hashPass})
 
         await user.save()
-
-        return res.status(201).json({email: user.email, name: user.name, id: user._id})
+        
+        return res.status(201).json({
+            email: user.email, 
+            name: user.name, 
+            id: user._id, 
+            token: createToken(user._id)
+        })
     }catch(err){
         return res.status(500).json(err)
     }
@@ -47,7 +53,8 @@ export const log = async (req, res) => {
         return res.status(200).json({
             name: existingUser.name, 
             email: existingUser.email,
-            id: existingUser._id
+            id: existingUser._id,
+            token: createToken(user._id)
         })
 
     }catch(err){

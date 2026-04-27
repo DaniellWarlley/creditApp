@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { clientService } from './../services/clientService';
+import { clientService } from '../../services/clientService';
 
 export default function useMutationClient(){
     const queryClient = useQueryClient()
