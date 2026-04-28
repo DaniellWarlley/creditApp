@@ -3,7 +3,7 @@ import { Clients } from "../models/clientSchema.js"
 
 export const createClient = async (req, res) => {
     const { data } = req.body || {}
-    const { userId} = req.userId
+    const userId = req.userId
 
     if(!userId || !data  ) return res.status(400).json({msg: 'Dados invalidos'})
 
@@ -25,7 +25,7 @@ export const createClient = async (req, res) => {
 }
 
 export const getAllUserClients = async (req, res) => {
-    const { userId} = req.userId
+    const userId = req.userId
 
     if(!userId) return res.status(400).json({msg: 'Dados invalidos'})
 

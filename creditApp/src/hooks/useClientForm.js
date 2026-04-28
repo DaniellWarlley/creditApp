@@ -2,10 +2,13 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { clientSchema } from '../schemas/clientSchema'
 import useMutationClient from './clientsHooks/useMutationClient'
+import { useClientStore } from '../store/useClientStore'
+import { useEffect } from 'react'
 
 
-export default function useClientForm(onClick = null){
+export default function useClientForm(){
     const { mutateAsync, isPending } = useMutationClient()
+    const {closeClientModal, selectedClient} = useClientStore()
 
     const {register, handleSubmit, formState, reset} = useForm({
         resolver: zodResolver(clientSchema),
@@ -18,7 +21,11 @@ export default function useClientForm(onClick = null){
     })
 
     const onSubmit = async (data) => {
-        await mutateAsync(data)
+        if(selectedClient == null){
+            await mutateAsync(data)
+        }else{
+            console.log('testee')
+        }
         handleCancel()
     }
 
@@ -27,9 +34,27 @@ export default function useClientForm(onClick = null){
         console.log(id)
     }
     const handleCancel = () => {
-        onClick?.()
-        reset()
+        closeClientModal()
+        reset({
+            name: '',
+            contato: '',
+            credito: 0,
+            debito: 0
+        })
     }
+
+    useEffect(() => {
+        if(selectedClient){
+            reset(selectedClient)
+        }else{
+            reset({
+            name: '',
+            contato: '',
+            credito: 0,
+            debito: 0
+        })
+        }
+    }, [selectedClient])
 
     return{
         register,

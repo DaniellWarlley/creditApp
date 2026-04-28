@@ -6,6 +6,9 @@ export const authService = {
             method: 'POST',
             body: data
         })
+
+        localStorage.setItem('token', res.token)
+
         return res
     },    
     log: async (data) => {
@@ -15,7 +18,23 @@ export const authService = {
         })
 
         localStorage.setItem('token', res.token)
-        console.log(res.token)
+        
         return res
+    },
+    checkToken: async() => {
+        const token = localStorage.getItem('token')
+
+        if(!token) return
+
+        try {
+            const res = await apiFetch('auth/verifyToken', {
+                method: 'GET',
+                token: token
+            })
+
+            return res
+        } catch (error) {
+            return error
+        }
     }
 }

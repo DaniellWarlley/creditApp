@@ -54,10 +54,19 @@ export const log = async (req, res) => {
             name: existingUser.name, 
             email: existingUser.email,
             id: existingUser._id,
-            token: createToken(user._id)
+            token: createToken(existingUser._id)
         })
 
     }catch(err){
         return res.status(500).json(err)
     }
+}
+
+export const verifyToken = async(req, res) => {
+    const userId = req.userId
+
+    if(userId){
+        return res.status(200).json({valid: true})
+    }
+    return res.status(401).json({valid: false})
 }

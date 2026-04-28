@@ -1,9 +1,10 @@
 import { GlobalStyle } from "../assets/global"
 import { styled } from 'styled-components'
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import NavItem from "../components/NavItem"
 import { IoMdPeople, IoIosLogOut  } from "react-icons/io"
 import { FaChartLine, FaScrewdriver, FaArrowRightArrowLeft, FaBars, FaMagnifyingGlass } from "react-icons/fa6"
+import useLogOut from "../hooks/useLogOut"
 
 const Main = styled.main`
     height: 100vh;
@@ -69,7 +70,7 @@ const LogOutButton = styled.button`
 `
 
 export default function Home(){
-    const navigate = useNavigate()
+    const logOut = useLogOut()
 
     return(
         <Main>
@@ -83,7 +84,7 @@ export default function Home(){
                 <NavItem to='Serviços' text='Serviços' icon={FaScrewdriver }/>
                 <NavItem to='Movimentações' text='Movimentacões' icon={FaArrowRightArrowLeft }/>
                 <NavItem to='Equipe' text='Equipe' icon={FaBars }/>
-                <LogOutButton onClick={() => navigate('/')}>
+                <LogOutButton onClick={logOut}>
                     <IoIosLogOut/>
                     Sair
                 </LogOutButton>

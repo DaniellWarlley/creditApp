@@ -1,6 +1,7 @@
 import styled from "styled-components"
-import useClientForm from "../hooks/useClientForm"
 import Loading from "./Loading"
+import { useClientStore } from "../store/useClientStore"
+import useClientForm from "../hooks/useClientForm"
 
 const Button = styled.button`
     padding: 10px;
@@ -152,13 +153,15 @@ const Buttons = styled.div`
         }
     }
 `
-export default function Modal({toggle, onClick}){
-    const {register, handleSubmit, onSubmit, handleCancel, errors, isPending} = useClientForm(onClick) 
+export default function Modal(){
+    const {register, handleSubmit, onSubmit, handleCancel, errors, isPending} = useClientForm()
+
+    const {isModalOpen, openClientModal} = useClientStore()
 
     return(
         <>
-            <Button onClick={onClick}>Cadastrar cliente</Button>
-            {toggle && (
+            <Button onClick={() => openClientModal()}>Cadastrar cliente</Button>
+            {isModalOpen && (
                 <Overlay>
                     <Form onSubmit={handleSubmit(onSubmit)}>
                         {isPending && <Loading/>}

@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom"
 import UseToggle from "./hooks/useToggle"
 import useAuthForm from "./hooks/useAuthForm"
 import Loading from "./components/Loading"
+import { useEffect } from "react"
+import { authService } from "./services/authService"
+
 
 const Main = styled.main`
   min-height: 100vh;
@@ -140,6 +143,20 @@ const InputWrapper = styled.div`
 function App() {
   const { toggle, handleToggle} = UseToggle()
   const { register, handleSubmit, onSubmit, errors, isSubmitting } = useAuthForm(toggle)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const verify = async () => {
+      const valid = await authService.checkToken()
+
+      if(valid?.valid) {
+        console.log('aaaaa')
+        navigate('/home/clientes') // exemplo
+      }
+    }
+
+    verify()
+  }, [navigate])
   
   return (
     <Main>

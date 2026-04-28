@@ -5,6 +5,7 @@ import { FaPen, FaTrash  } from "react-icons/fa"
 import useClientForm from "../hooks/useClientForm"
 import { clientService } from "../services/clientService"
 import useDeleteClient from "../hooks/clientsHooks/useDeleteClient"
+import { useClientStore } from "../store/useClientStore"
 
 const TableStyled = styled.table`
     width: 100%;
@@ -81,6 +82,8 @@ const TrashIcon = styled(FaTrash)`
 export default function Table(){
     const { data, isPending } = useQueryClient() 
     const { mutate } = useDeleteClient()
+    const openClientModal = useClientStore(state => state.openClientModal)
+
     return(
         <TableContainer>
             {isPending && <Loading/>}
@@ -106,7 +109,7 @@ export default function Table(){
                         <td>{client.credito}</td>
                         <td>{client.debito}</td>
                         <td>{client.date || '...'}</td>
-                        <td><PencilIcon /> <TrashIcon onClick={() => mutate(client._id)}/></td> 
+                        <td><PencilIcon onClick={() => openClientModal(client)}/> <TrashIcon onClick={() => mutate(client._id)}/></td> 
                     </Row>)}                  
                 </tbody>               
             </TableStyled>
