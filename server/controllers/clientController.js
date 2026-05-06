@@ -66,6 +66,33 @@ export const deleteClientById = async (req, res) => {
 
         return res.status(200).json({msg: 'Cliente encontrado com sucesso'})
     } catch (error) {
-        return res.status(500).json(res)
+        return res.status(500).json(err)
+    }
+}
+
+export const editClient = async (req, res) => {
+    const userId = req.userId
+    const { clientId, data } = req.body
+
+    if(!clientId || !userId || !data) return res.status(400).json({msg: 'Dados invalidos'})
+
+    try{
+        const client = await Clients.findOneAndUpdate(
+            {_id: clientId, userId},
+            {$set: {
+                name: data.name,
+                credito: data.credito,
+                debito: data.debito
+            }},
+            {new: true, runValidators: true}
+        )
+
+        if (!updatedClient) {
+            return res.status(404).json({ msg: 'Cliente não encontrado' });
+        }
+
+        return res.status(200).json(client)
+    }catch(err){
+        return res.status(500).json(err)
     }
 }

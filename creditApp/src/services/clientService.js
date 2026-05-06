@@ -31,5 +31,15 @@ export const clientService = {
         })
 
         return res
+    },
+    editClient: async (clientId, data) => {
+        const token = localStorage.getItem('token')
+
+        const res = await apiFetch('clients/client', {
+            method: 'PUT',
+            token: token
+        })
+
+        return res
     }
 }
