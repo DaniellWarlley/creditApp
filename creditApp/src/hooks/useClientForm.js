@@ -4,10 +4,12 @@ import { clientSchema } from '../schemas/clientSchema'
 import useMutationClient from './clientsHooks/useMutationClient'
 import { useClientStore } from '../store/useClientStore'
 import { useEffect } from 'react'
+import useEditClient from './clientsHooks/useEditClient'
 
 
 export default function useClientForm(){
     const { mutateAsync, isPending } = useMutationClient()
+    const { mutate } = useEditClient()
     const {closeClientModal, selectedClient} = useClientStore()
 
     const {register, handleSubmit, formState, reset} = useForm({
@@ -24,7 +26,7 @@ export default function useClientForm(){
         if(selectedClient == null){
             await mutateAsync(data)
         }else{
-            console.log('testee')
+            await mutate(selectedClient._id, data)
         }
         handleCancel()
     }
