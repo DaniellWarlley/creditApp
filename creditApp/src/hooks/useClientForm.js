@@ -26,7 +26,7 @@ export default function useClientForm(){
         if(selectedClient == null){
             await mutateAsync(data)
         }else{
-            await mutate(selectedClient._id, data)
+            await mutate({id: selectedClient._id, data: data})
         }
         handleCancel()
     }

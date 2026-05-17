@@ -9,14 +9,16 @@ export default function useEditClient() {
             clientService.editClient(id, data),
         onMutate: async ({ id, data }) => {
             await queryClient.cancelQueries({
-                queryKey: ['clientes']
+                queryKey: ['clients']
             })
 
-            const previous = queryClient.getQueryData(['clientes'])
-            
-            queryClient.setQueryData(['clientes'], (oldData) => {
+            const previous = queryClient.getQueryData(['clients']) 
+
+            queryClient.setQueryData(['clients'], (oldData) => {
+                console.log(oldData)
                 if (!oldData) return oldData
                 return oldData.map(cliente => {
+                    
                     if (cliente._id === id) {
                         return {
                             ...cliente,
@@ -33,14 +35,14 @@ export default function useEditClient() {
 
         onError: (err, variables, context) => {
             queryClient.setQueryData(
-                ['clientes'],
+                ['clients'],
                 context.previous
             )
         },
 
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: ['clientes']
+                queryKey: ['clients']
             })
         }
     })

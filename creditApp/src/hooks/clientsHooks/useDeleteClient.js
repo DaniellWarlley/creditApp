@@ -7,7 +7,7 @@ export default function useDeleteClient(){
     return useMutation({
         mutationFn: (id) => clientService.deleteClientById(id),
         onMutate: async (id) => {
-            await queryClient.cancelQueries(['clientes'])
+            await queryClient.cancelQueries(['clients'])
 
             const previus = queryClient.getQueryData(['clients'])
 

@@ -37,7 +37,8 @@ export const clientService = {
 
         const res = await apiFetch('clients/client', {
             method: 'PUT',
-            token: token
+            token: token,
+            body: {clientId, data}
         })
 
         return res

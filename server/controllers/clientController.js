@@ -14,7 +14,7 @@ export const createClient = async (req, res) => {
     const saldo = data.credito - data.debito
 
     try{
-        const client = new Clients({userId, name: data.name, contato: data.contato, saldo: saldo, debito: data.debito, credito: data.credito})
+        const client = new Clients({userId, name: data.name, contato: data.contato, saldo: data.credito - data.debito, debito: data.debito, credito: data.credito})
 
         await client.save()
 
@@ -73,6 +73,7 @@ export const deleteClientById = async (req, res) => {
 export const editClient = async (req, res) => {
     const userId = req.userId
     const { clientId, data } = req.body
+    console.log(req.body)
     
     if(!clientId || !userId || !data) return res.status(400).json({msg: 'Dados invalidos'})
 
@@ -82,12 +83,13 @@ export const editClient = async (req, res) => {
             {$set: {
                 name: data.name,
                 credito: data.credito,
-                debito: data.debito
+                debito: data.debito,
+                saldo: data.credito - data.debito
             }},
-            {new: true, runValidators: true}
+            {returnDocument: 'after', runValidators: true}
         )
 
-        if (!updatedClient) {
+        if (!client) {
             return res.status(404).json({ msg: 'Cliente não encontrado' });
         }
 
