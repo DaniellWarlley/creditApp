@@ -24,60 +24,110 @@ const Overlay = styled.div`
     position: fixed;
     inset: 0;
 
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
 
-    background-color: rgba(0, 0, 0, 0.45);
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(3px);
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+    padding: 20px;
+
     z-index: 9999;
 `
 
 const Form = styled.form`
-    padding: 10px;
+    width: 420px;
+    max-width: 100%;
 
-    width: 30%;
+    padding: 24px;
 
     display: flex;
     flex-direction: column;
-    position: relative;
+    gap: 20px;
 
     background-color: #1A1A1A;
-    border-radius: 8px; 
-    h1{
-        color: #E5E7EB;
-        
+    border: 1px solid #2A2A2A;
+    border-radius: 12px;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+
+    animation: modalFade 0.25s ease;
+
+    @keyframes modalFade {
+        from {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.98);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
     }
-    p{
-        color: #f72c25;
+
+    h2 {
+        color: #E5E7EB;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    p {
+        color: #EF4444;
+        font-size: 0.875rem;
     }
 `
-const Field = styled.div`
-    margin-top: 10px;
-    width: 100%;
 
-    display: flex;  
+const Header = styled.div`
+    display: flex;
     flex-direction: column;
+    gap: 4px;
 
-    label{
+    span {
+        color: #9CA3AF;
+        font-size: 0.9rem;
+    }
+`
+const FieldsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+`
+
+const Field = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
         color: #E5E7EB;
+        font-size: 0.9rem;
+        font-weight: 500;
     }
     
-    input{
-        padding: 5px 0px;
-        margin-top: 5px;
+    input {
+        padding: 11px 12px;
 
-        height: 20px;
-        width: 100%;
+        background-color: #121212;
+        color: #E5E7EB;
 
-        background-color: #1F1F1F;
-        color: #9CA3AF;
         border: 1px solid #2E2E2E;
-        border-radius: 3px;
+        border-radius: 6px;
         outline: 0;
+
+        transition: all ease 0.3s;
+
+        &::placeholder {
+            color: #6B7280;
+        }
+
+        &:focus {
+            border-color: #f72c25;
+            box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.15);
+        }
     }
 `
 const SaldoContainer = styled.div`
@@ -111,6 +161,43 @@ const SaldoContainer = styled.div`
         outline: 0;
     }
 `
+const SaldoContainerFields = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+        color: #E5E7EB;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    input {
+        padding: 5px;
+
+        height: 30px;
+        width: 95%;
+
+        background-color: #121212;
+        color: #E5E7EB;
+
+        border: 1px solid #2E2E2E;
+        border-radius: 6px;
+        outline: 0;
+
+        transition: all ease 0.3s;
+
+        &::placeholder {
+            color: #6B7280;
+        }
+
+        &:focus {
+            border-color: #f72c25;
+            box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.15);
+        }
+    }
+`
+
 const Buttons = styled.div`
     margin-top: 10px;
 
@@ -165,30 +252,37 @@ export default function Modal(){
                 <Overlay>
                     <Form onSubmit={handleSubmit(onSubmit)}>
                         {isPending && <Loading/>}
-                        <h1>Salvar cliente</h1>
-                        <Field>
-                            <label htmlFor="">Nome</label>
-                            <input type="text" placeholder="Nome do cliente..." {...register('name')}/>
-                            <p>{errors.name?.message}</p>
-                        </Field>
-                        <Field>
-                            <label htmlFor="">Contato</label>
-                            <input type="text" placeholder="Contato do cliente..." {...register('contato')}/>
-                            <p>{errors.contato?.message}</p>
-                        </Field>
-                        <SaldoContainer>
-                            <Field>
-                                <label htmlFor="">Credito</label>
-                                <input type="text" placeholder="Credito do cliente..." defaultValue={0} {...register('credito')}/>                               
+                        <Header>
+                            <h2>Salvar cliente</h2>
+                            <span>Cadastre um Cliente para usar nas movimentações.</span>
+                        </Header>
+
+                        <FieldsContainer>
+                                <Field>
+                                <label htmlFor="">Nome</label>
+                                <input type="text" placeholder="Nome do cliente..." {...register('name')}/>
+                                <p>{errors.name?.message}</p>
                             </Field>
                             <Field>
-                                <label htmlFor="">Debito</label>
-                                <input type="text" placeholder="Debito do cliente..."defaultValue={0} {...register('debito')}/>                               
+                                <label htmlFor="">Contato</label>
+                                <input type="text" placeholder="Contato do cliente..." {...register('contato')}/>
+                                <p>{errors.contato?.message}</p>
                             </Field>
-                            <p>Saldo: R$ 0</p>
-                        </SaldoContainer>
-                        <p>{errors.credito?.message}</p>
-                        <p>{errors.debito?.message}</p>
+                            <SaldoContainer>
+                                <SaldoContainerFields>
+                                    <label htmlFor="">Credito</label>
+                                    <input type="text" placeholder="Credito do cliente..." defaultValue={0} {...register('credito')} step="0.01"/>                               
+                                </SaldoContainerFields>
+                                <SaldoContainerFields>
+                                    <label htmlFor="">Debito</label>
+                                    <input type="text" placeholder="Debito do cliente..."defaultValue={0} {...register('debito')} step="0.01"/>                               
+                                </SaldoContainerFields>
+                                <p>Saldo: R$ 0</p>
+                            </SaldoContainer>
+                            <p>{errors.credito?.message}</p>
+                            <p>{errors.debito?.message}</p>
+                        </FieldsContainer>
+                        
                         <Buttons>
                             <button id="cancelButton" onClick={() => handleCancel()} type="button">Cancelar</button>
                             <button id="submitButton" type="submit">Enviar</button>

@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import useEditClient from '../hooks/useEditClient.js'
 
 
-export default function useClientForm(){
+export default function useClientForm(){ 
     const { mutateAsync, isPending } = useMutationClient()
     const { mutate } = useEditClient()
     const {closeClientModal, selectedClient} = useClientStore()
@@ -35,6 +35,7 @@ export default function useClientForm(){
         onClick()
         console.log(id)
     }
+    
     const handleCancel = () => {
         closeClientModal()
         reset({

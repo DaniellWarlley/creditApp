@@ -134,9 +134,7 @@ const InputWrapper = styled.div`
     }
 `
 
-export default function Login(){
-    const { handleSubmit, onSubmit, isSubmitting, errors, register } = useLogForm()
-    
+export default function Cad(){
     return(
         <Main>
             <GlobalStyle/>

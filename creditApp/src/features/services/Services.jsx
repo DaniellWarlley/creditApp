@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import SearchBar from '../../shared/components/SearchBar'
 import Filter from '../../shared/components/Filter'
 import UseToggle from '../../shared/hooks/useToggle.js'
+import ServiceModal from './components/ServiceModal.jsx'
 
 
 export const Header = styled.header`
@@ -18,6 +19,7 @@ export default function Services(){
             <Header>
                 <SearchBar/>
                 <Filter/>
+                <ServiceModal/>
             </Header>
         </>
     )

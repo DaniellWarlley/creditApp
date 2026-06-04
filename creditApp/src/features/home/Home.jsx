@@ -81,8 +81,8 @@ export default function Home(){
                 </Title>
                 <NavItem to='DashBoard' text='DashBoard' icon={FaChartLine}/>
                 <NavItem to='Clientes' text='Clientes' icon={IoMdPeople}/>
-                <NavItem to='Serviços' text='Serviços' icon={FaScrewdriver }/>
-                <NavItem to='Movimentações' text='Movimentacões' icon={FaArrowRightArrowLeft }/>
+                <NavItem to='Servicos' text='Serviços' icon={FaScrewdriver }/>
+                <NavItem to='Movimentacoes' text='Movimentacões' icon={FaArrowRightArrowLeft }/>
                 <NavItem to='Equipe' text='Equipe' icon={FaBars }/>
                 <LogOutButton onClick={logOut}>
                     <IoIosLogOut/>
