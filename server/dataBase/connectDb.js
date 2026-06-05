@@ -8,8 +8,9 @@ const pass = process.env.DB_PASS
 
 export default async function connectDb() {
     try{
-        await mongoose.connect(`mongodb+srv://${user}:${pass}@cluster0.zzmkpcv.mongodb.net/?appName=Cluster0`)
+        await mongoose.connect(`mongodb://${user}:${pass}@ac-szw26sa-shard-00-00.cc0g8o5.mongodb.net:27017,ac-szw26sa-shard-00-01.cc0g8o5.mongodb.net:27017,ac-szw26sa-shard-00-02.cc0g8o5.mongodb.net:27017/?ssl=true&replicaSet=atlas-2tilln-shard-0&authSource=admin&appName=Cluster0`)
     }catch(err){
         console.log(err)
+        throw err
     }
 }
