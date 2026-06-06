@@ -177,7 +177,7 @@ const Buttons = styled.div`
 `
 
 export default function ServiceModal() {
-    const { register, errors, handleSubmit, onSubmit, handleCancel } = useServiceForm()
+    const { register, errors, handleSubmit, onSubmit, handleCancel, isPending } = useServiceForm()
     const { isOpen, openServiceModal } = serviceStore()
 
     return (
@@ -187,6 +187,7 @@ export default function ServiceModal() {
             {isOpen &&
                 <Overlay>
                     <Form onSubmit={handleSubmit(onSubmit)}>
+                        {isPending && <Loading/>}
                         <Header>
                             <h2>Novo serviço</h2>
                             <span>Cadastre um serviço para usar nas movimentações.</span>

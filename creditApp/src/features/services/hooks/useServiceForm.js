@@ -15,8 +15,13 @@ export default function useServiceForm(){
         }
     })
 
-    const onSubmit = (data) => {
-        mutateAsync(data)
+    const onSubmit = async (data) => {
+        try{
+            await mutateAsync(data)
+            handleCancel()
+        }catch(err){
+            console.log(err)
+        }
     }
 
     const handleCancel = () => {
@@ -32,6 +37,7 @@ export default function useServiceForm(){
         handleSubmit,
         handleCancel,
         errors: formState.errors,
-        onSubmit
+        onSubmit,
+        isPending
     }
 }

@@ -2,6 +2,7 @@ import { GlobalStyle } from "../../../app/assets/global.js"
 import { styled } from 'styled-components'
 import useLogForm from "../hooks/useLogForm"
 import Loading from '../../../shared/components/Loading.jsx'
+import { useNavigate } from "react-router-dom"
 
 const Main = styled.main`
     min-height: 100vh;
@@ -136,7 +137,8 @@ const InputWrapper = styled.div`
 
 export default function Login(){
     const { handleSubmit, onSubmit, isSubmitting, errors, register } = useLogForm()
-    
+    const navigate = useNavigate()
+
     return(
         <Main>
             <GlobalStyle/>
@@ -159,7 +161,7 @@ export default function Login(){
                         <p>{errors.passWord?.message}</p>
                     </InputWrapper>
                     <button type="submit">Logar</button>
-                    <p>Ainda não tem uma conta? <span>Clique aqui.</span></p>
+                    <p>Ainda não tem uma conta? <span onClick={() => navigate('/Cadastro')}>Clique aqui.</span></p>
                 </FormBody>
             </Form>
         </Main>

@@ -65,7 +65,7 @@ export const deleteClientById = async (req, res) => {
         if(!client) return res.status(404).json({msg: 'Cliente não encontrado'})
 
         return res.status(200).json({msg: 'Cliente encontrado com sucesso'})
-    } catch (error) {
+    } catch (err) {
         return res.status(500).json(err)
     }
 }

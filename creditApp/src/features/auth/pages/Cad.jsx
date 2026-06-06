@@ -2,6 +2,8 @@ import { GlobalStyle } from "../../../app/assets/global.js"
 import { styled } from 'styled-components'
 import useLogForm from "../hooks/useLogForm"
 import Loading from '../../../shared/components/Loading.jsx'
+import useCadForm from "../hooks/useCadForm.js"
+import { useNavigate } from "react-router-dom"
 
 const Main = styled.main`
     min-height: 100vh;
@@ -135,6 +137,9 @@ const InputWrapper = styled.div`
 `
 
 export default function Cad(){
+    const {isSubmitting, register, errors, handleSubmit, onSubmit} = useCadForm()
+    const navigate = useNavigate()
+
     return(
         <Main>
             <GlobalStyle/>
@@ -142,10 +147,15 @@ export default function Cad(){
             <Form onSubmit={handleSubmit(onSubmit)}>
                 {isSubmitting && <Loading/>}
                 <FormHead>
-                    <h1>Login</h1>
-                    <p>Faça login para ter acesso ao site</p>
+                    <h1>Cadastro</h1>
+                    <p>Faça uma conta para ter acesso ao site</p>
                 </FormHead>
                 <FormBody>
+                    <InputWrapper>
+                        <label>Nome</label>
+                        <input type="text" placeholder="Digite seu nome..." {...register('name')}/>
+                        <p>{errors.name?.message}</p>
+                    </InputWrapper>
                     <InputWrapper>
                         <label>Email</label>
                         <input type="email" placeholder="Digite seu email..." {...register('email')}/>
@@ -157,7 +167,7 @@ export default function Cad(){
                         <p>{errors.passWord?.message}</p>
                     </InputWrapper>
                     <button type="submit">Logar</button>
-                    <p>Ainda não tem uma conta? <span>Clique aqui.</span></p>
+                    <p>Ainda não tem uma conta? <span onClick={() => navigate('/')}>Clique aqui.</span></p>
                 </FormBody>
             </Form>
         </Main>

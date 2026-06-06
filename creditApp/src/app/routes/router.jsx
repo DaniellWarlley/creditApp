@@ -7,11 +7,16 @@ import Movimentacoes from "../../features/movimentacoes/Movimentacoes.jsx"
 import Services from "../../features/services/Services.jsx"
 import Team from "../../features/team/Team.jsx"
 import Login from "../../features/auth/pages/Login.jsx"
+import Cad from "../../features/auth/pages/Cad.jsx"
 
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <Login/>
+    },
+    {
+        path: '/Cadastro',
+        element: <Cad/>
     },
     {
         path: '/Home',

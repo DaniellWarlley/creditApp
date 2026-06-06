@@ -11,5 +11,23 @@ export const servicesServices = {
         })
 
         return res
+    },
+    getAllUserServices: async () => {
+        const token = localStorage.getItem('token')
+
+        const res = await apiFetch('services/services', {
+            method: 'GET',
+            token: token
+        })
+
+        return res
+    },
+    deleteOneService: async (serviceId) => {
+        const token = localStorage.getItem('token')
+
+        const res = await apiFetch(`services/services/${serviceId}`, {
+            method: 'DELETE',
+            token: token
+        })
     }
 }

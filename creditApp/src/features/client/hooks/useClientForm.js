@@ -23,12 +23,16 @@ export default function useClientForm(){
     })
 
     const onSubmit = async (data) => {
-        if(selectedClient == null){
-            await mutateAsync(data)
-        }else{
-            await mutate({id: selectedClient._id, data: data})
+        try{
+            if(selectedClient == null){
+                await mutateAsync(data)
+            }else{
+                await mutate({id: selectedClient._id, data: data})
+            }
+            handleCancel()
+        }catch(err){
+            console.log(err)
         }
-        handleCancel()
     }
 
     const handleEdit = (id) => {
