@@ -166,8 +166,8 @@ export default function Cad(){
                         <input type="password" placeholder="Digite sua senha..." {...register('passWord')}/>
                         <p>{errors.passWord?.message}</p>
                     </InputWrapper>
-                    <button type="submit">Logar</button>
-                    <p>Ainda não tem uma conta? <span onClick={() => navigate('/')}>Clique aqui.</span></p>
+                    <button type="submit">Cadastrar</button>
+                    <p>Já tem uma conta? <span onClick={() => navigate('/')}>Clique aqui.</span></p>
                 </FormBody>
             </Form>
         </Main>

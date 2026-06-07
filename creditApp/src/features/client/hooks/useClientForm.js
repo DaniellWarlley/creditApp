@@ -34,11 +34,6 @@ export default function useClientForm(){
             console.log(err)
         }
     }
-
-    const handleEdit = (id) => {
-        onClick()
-        console.log(id)
-    }
     
     const handleCancel = () => {
         closeClientModal()
@@ -70,6 +65,5 @@ export default function useClientForm(){
         errors: formState.errors,
         isPending,
         handleCancel,
-        handleEdit
     }
 }

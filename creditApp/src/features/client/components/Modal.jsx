@@ -143,13 +143,6 @@ const SaldoContainer = styled.div`
     border-top: 3px solid #f72c25;
     background-color: #1E1E1E;
 
-    p{
-        padding: 5px;
-
-        color: #E5E7EB;
-        background-color: #2E2E2E;
-        border-radius: 3px;
-    }
     input{
         width: 100%;
         height: 20px;
@@ -277,7 +270,6 @@ export default function Modal(){
                                     <label htmlFor="">Debito</label>
                                     <input type="text" placeholder="Debito do cliente..."defaultValue={0} {...register('debito')} step="0.01"/>                               
                                 </SaldoContainerFields>
-                                <p>Saldo: R$ 0</p>
                             </SaldoContainer>
                             <p>{errors.credito?.message}</p>
                             <p>{errors.debito?.message}</p>

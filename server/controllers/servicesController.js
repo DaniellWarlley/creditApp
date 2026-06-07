@@ -52,3 +52,32 @@ export const deleteOneService = async (req, res) => {
         return res.status(500).json(err)
     }
 }
+
+export const editOneService = async (req, res) => {
+    const {id, data} = req.body
+
+    if (!id || !data) return res.status(400).json({msg: 'Dados invalidos'})
+
+    try{
+        const service = await Services.findByIdAndUpdate({ _id: id}, 
+            {
+                $set: {
+                    name: data.name,
+                    valor: data.valor
+                }
+            },
+            {
+                returnDocument: 'after',
+                runValidators: true
+            }
+        )
+
+        if (!service) {
+            return res.status(404).json({ msg: 'Cliente não encontrado' });
+        }
+
+        return res.status(200).json(service)
+    }catch(err){
+        return res.status(500).json(err)
+    }
+}

@@ -90,7 +90,7 @@ export default function Table(){
             <TableStyled>
                 <thead>
                     <tr>
-                        <th>Nome</th>
+                        <th>Cliente</th>
                         <th>Contato</th>
                         <th>Saldo</th>
                         <th>Crédito</th>

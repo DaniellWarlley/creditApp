@@ -29,5 +29,18 @@ export const servicesServices = {
             method: 'DELETE',
             token: token
         })
+
+        return res
+    },
+    updateOneService: async (id, data) => {
+        const token = localStorage.getItem('token')
+
+        const res = await apiFetch('services/services', {
+            method: 'PUT',
+            token: token,
+            body: { id, data }
+        })
+
+        return res
     }
 }

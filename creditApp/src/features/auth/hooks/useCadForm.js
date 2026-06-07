@@ -20,7 +20,7 @@ export default function useCadForm(){
     const onSubmit = async (data) => {
         try{
             await authService.cad(data)
-            navigate('home/Clientes')
+            navigate('../home/Clientes')
         }catch(err){
             handleAuthError(err, setError)
         }       

@@ -73,7 +73,6 @@ export const deleteClientById = async (req, res) => {
 export const editClient = async (req, res) => {
     const userId = req.userId
     const { clientId, data } = req.body
-    console.log(req.body)
     
     if(!clientId || !userId || !data) return res.status(400).json({msg: 'Dados invalidos'})
 

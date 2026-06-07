@@ -2,6 +2,8 @@ import styled from "styled-components"
 import Loading from "../../../shared/components/Loading.jsx"
 import { FaPen, FaTrash  } from "react-icons/fa"
 import useQueryService from "../hooks/useQueryService.js"
+import useDeleteService from "../hooks/useDeleteService.js"
+import { serviceStore } from "../../../shared/store/serviceStore.js"
 
 const TableStyled = styled.table`
     width: 100%;
@@ -74,6 +76,8 @@ const TrashIcon = styled(FaTrash)`
 `
 export default function ServiceTable(){
     const { data, isPending } = useQueryService()
+    const { mutate } = useDeleteService()
+    const openServiceModal = serviceStore(state => state.openServiceModal)
 
     return(
         <TableContainer>
@@ -90,12 +94,11 @@ export default function ServiceTable(){
 
                 <tbody>
                     {data?.map(service => 
-                    <Row key={service._id}>
-                        {console.log(service)}
-                        <td>{service.name}</td>
-                        <td>{service.valor}</td>
-                        <td>{service.status}</td>
-                        <td><PencilIcon /> <TrashIcon/></td> 
+                    <Row key={service?._id}>
+                        <td>{service?.name}</td>
+                        <td>{service?.valor}</td>
+                        <td>{service?.status}</td>
+                        <td><PencilIcon onClick={() => openServiceModal(service)}/> <TrashIcon onClick={() => mutate(service?._id)}/></td> 
                     </Row>)}                  
                 </tbody>               
             </TableStyled>
