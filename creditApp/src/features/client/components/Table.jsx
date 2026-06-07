@@ -102,14 +102,14 @@ export default function Table(){
 
                 <tbody>
                     {data?.map(client => 
-                    <Row key={client._id} saldo={client.saldo}>
-                        <td>{client.name}</td>
-                        <td>{client.contato}</td>
-                        <td>{client.saldo}</td>
-                        <td>{client.credito}</td>
-                        <td>{client.debito}</td>
-                        <td>{client.date || '...'}</td>
-                        <td><PencilIcon onClick={() => openClientModal(client)}/> <TrashIcon onClick={() => mutate(client._id)}/></td> 
+                    <Row key={client?._id} saldo={client?.saldo}>
+                        <td>{client?.name}</td>
+                        <td>{client?.contato}</td>
+                        <td>{client?.saldo}</td>
+                        <td>{client?.credito}</td>
+                        <td>{client?.debito}</td>
+                        <td>{client?.date || '...'}</td>
+                        <td><PencilIcon onClick={() => openClientModal(client)}/> <TrashIcon onClick={() => mutate(client?._id)}/></td> 
                     </Row>)}                  
                 </tbody>               
             </TableStyled>

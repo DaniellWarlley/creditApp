@@ -1,6 +1,6 @@
 export default async function apiFetch(endPoint, {method = 'GET', headers = {}, body, token} = {} ){
     try{
-        const response = await fetch(`https://creditapp-1rw1.onrender.com/${endPoint}`,{
+        const response = await fetch(`http://localhost:3333/${endPoint}`,{
             method: method,
             headers: {
                 "Content-Type": "application/json",
