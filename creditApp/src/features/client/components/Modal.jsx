@@ -4,7 +4,7 @@ import { useClientStore } from "../../../shared/store/useClientStore"
 import useClientForm from "../hooks/useClientForm"
 
 const Button = styled.button`
-    padding: 10px;
+    padding: 7px;
 
     background-color: #1A1A1A;
     border-radius: 3px;
@@ -17,6 +17,10 @@ const Button = styled.button`
 
     &:hover{
         background-color: #222222;
+    }
+
+    @media (max-width: 768px) {
+        height: 45px;
     }
 `
 

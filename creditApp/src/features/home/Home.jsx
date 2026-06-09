@@ -11,6 +11,10 @@ const Main = styled.main`
     width: 100vw;
 
     display: flex;
+
+    @media (max-width: 768px) {
+        flex-direction: column-reverse;
+    }
 `
 const SideMenu = styled.aside`
     width: 17%;
@@ -21,10 +25,19 @@ const SideMenu = styled.aside`
     flex-direction: column;
 
     background-color: #1E1E1E;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 10%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
 `
 
 const Title = styled.header`
-    
     h1{
         margin: 10px;
         padding: 5px 15px;
@@ -34,6 +47,10 @@ const Title = styled.header`
     }
     span{
         color: #f72c25;
+    }
+
+    @media (max-width: 768px) {
+        display: none;
     }
 `
 
@@ -66,6 +83,10 @@ const LogOutButton = styled.button`
     &:hover{
         background-color: #f72c25;
         color: #fff;
+    }
+    
+    @media (max-width: 768px) {
+        width: 15%;
     }
 `
 

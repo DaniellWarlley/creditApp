@@ -12,6 +12,10 @@ import Cad from "../../features/auth/pages/Cad.jsx"
 export const router = createBrowserRouter([
     {
         path: '/',
+        element: <App/>
+    },
+    {
+        path: '/login',
         element: <Login/>
     },
     {

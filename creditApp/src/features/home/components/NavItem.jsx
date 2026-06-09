@@ -22,6 +22,17 @@ const StyledNavLink = styled(NavLink)`
     &:hover{
         color: #f72c25;
     }
+
+    @media (max-width: 768px) {
+        width: 8%;
+
+        display: flex;
+        justify-content: center;
+
+        p{
+            display: none;
+        }
+    }
 `
 
 export default function NavItem({to, text, icon: Icon}){

@@ -4,7 +4,7 @@ import useServiceForm from "../hooks/useServiceForm"
 import { serviceStore } from "../../../shared/store/serviceStore"
 
 const Button = styled.button`
-    padding: 10px;
+    padding: 7px;
 
     background-color: #1A1A1A;
     border-radius: 3px;
@@ -17,6 +17,10 @@ const Button = styled.button`
 
     &:hover{
         background-color: #222222;
+    }
+
+    @media (max-width: 768px) {
+        height: 15%;
     }
 `
 

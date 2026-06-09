@@ -4,9 +4,10 @@ import styled from "styled-components"
 const StyledSearchBar = styled.div`
     padding: 10px;
 
-    width: 220px;
+    width: 210px;
 
     display: flex;
+    align-items: center;
     justify-content: center;
 
     background-color: #1A1A1A;
@@ -14,6 +15,7 @@ const StyledSearchBar = styled.div`
     color: #E5E7EB;
 
     gap: 15px;
+
     input{
         width: 100%;
 
@@ -21,6 +23,15 @@ const StyledSearchBar = styled.div`
         outline: 0;
         border: none;
         color: #E5E7EB;
+    }
+
+    input::placeholder {
+        color: #9CA3AF;
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+        max-width: 90%;
     }
 `
 

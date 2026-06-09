@@ -16,6 +16,10 @@ const Select = styled.select`
     &:hover{
         background-color: #222222;
     }
+
+    @media (max-width: 768px) {
+        height: 45px;
+    }
 `
 
 export default function Filter(){

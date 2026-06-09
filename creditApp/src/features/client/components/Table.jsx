@@ -93,8 +93,8 @@ export default function Table(){
                         <th>Cliente</th>
                         <th>Contato</th>
                         <th>Saldo</th>
-                        <th>Crédito</th>
-                        <th>Débito</th>
+                        <th>Entradas</th>
+                        <th>Saidas</th>
                         <th>Última mov.</th>
                         <th>Detalhes</th>
                     </tr>

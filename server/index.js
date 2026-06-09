@@ -3,6 +3,8 @@ import router from './routes/index.js'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import connectDb from './dataBase/connectDb.js'
+import checkToken from './middleware/checkToken.js'
+import { confirmToken } from '../creditApp/src/shared/utils/confirmToken.js'
 
 const app = express()
 const PORT = process.env.PORT || 3333
@@ -15,6 +17,8 @@ app.use(router)
 app.get('/', (req, res) => {
     res.send('heloo word')
 })
+
+app.get('/checkToken', checkToken, confirmToken)
 
 connectDb()
     .then(() => console.log("Banco conectado"))

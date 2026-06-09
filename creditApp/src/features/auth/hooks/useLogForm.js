@@ -19,7 +19,7 @@ export default function useLogForm(){
     const onSubmit = async (data) => {
         try{
             await authService.log(data)
-            navigate('home/Clientes')
+            navigate('../home/Clientes')
         }catch(err){
             handleAuthError(err, setError)
         }       
